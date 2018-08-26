@@ -23,4 +23,9 @@ class TestsController extends Controller
         $questions = Test::find(1)->questions;
         dump($questions[0]->name); //working
     }
+
+    public function apiTest() 
+    {
+        return Test::get()->where('active', '1');
+    }
 }
