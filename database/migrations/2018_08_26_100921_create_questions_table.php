@@ -22,6 +22,7 @@ class CreateQuestionsTable extends Migration
                 ->on('tests')
                 ->onDelete('cascade')
                 ->onUpdate('cascade');
+            $table->tinyInteger('active');
             $table->timestamps();
         });
     }

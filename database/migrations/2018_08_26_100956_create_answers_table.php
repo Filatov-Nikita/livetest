@@ -17,12 +17,13 @@ class CreateAnswersTable extends Migration
             $table->increments('id');
             $table->string('text');
             $table->integer('question_id')->unsigned();
-            $table->tinyInteger('correct');
+            $table->tinyInteger('correct')->default(0);
             $table->foreign('question_id')
             ->references('id')
             ->on('questions')
             ->onDelete('cascade')
             ->onUpdate('cascade');
+            $table->tinyInteger('active');
             $table->timestamps();
         });
     }
