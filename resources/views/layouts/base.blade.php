@@ -9,7 +9,9 @@
 </head>
 <body>
     <main>
-        <div class="header">Спсиок активных тестов</div>
+        <div class="content">
+            @yield('content')
+        </div>
     </main>
 </body>
 </html>

@@ -11,8 +11,4 @@
 |
 */
 
-Route::get('/', function () {
-    return view('main');
-});
-
 Route::get('/tests', 'TestsController@testsDataBase');
