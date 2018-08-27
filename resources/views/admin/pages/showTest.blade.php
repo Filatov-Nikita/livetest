@@ -23,6 +23,9 @@
     } 
 </style>
 <div class="back"><a href="{{url(route('admin.showListTests'))}}">Назад</a></div>
+@if(session('error'))
+    <div>{{session('error')}}</div>
+@endif
 <div class="container">
     <h2>Название теста: {{$test->name}}</h2>
     <div class="questions">Вопросы к тесту:</div>

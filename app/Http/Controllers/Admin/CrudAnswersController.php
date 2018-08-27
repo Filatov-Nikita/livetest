@@ -38,11 +38,17 @@ class CrudAnswersController extends Controller
     {
         $test_id = session('test_id');
         $answer = Answer::findOrFail($answer_id);
-        $correctElements = $answer->question->answers->where('correct', 1)->where('id', '<>', $answer_id);
-        if(empty($correctElements[0])) {
+        $correctElements = $answer->question->answers->where('correct', 1)->where('id', '<>', $answer_id)->first();
+        if(empty($correctElements) && !$answer->correct) {
              $correct = $request->input('correct') ? 1 : 0;
         } else {
-            return 'Вы пытаетесь поставить 2 правильных ответа, для одного вопроса';
+
+            if($answer->correct) {
+                 $answer->correct = 0; $answer->save(); 
+                 return redirect()->route('admin.showTestPage', ['id' => $test_id])->with(['error' => 'Возможно произошла какая-то ошибка, но мы уже все поправили :)']);
+            } else {
+                return redirect()->route('admin.showTestPage', ['id' => $test_id])->with(['error' => 'Вы пытаетесь поставить 2 правильных ответа для одного вопроса!']); }
+                
         }
         $answer->update([ 'text' => $request->input('text'), 'correct' => $correct ]);
         return view('layouts.primary', ['page' => 'admin.pages.linkAnswer', 'test_id' => $test_id, 'edit' => true]);
@@ -52,7 +58,11 @@ class CrudAnswersController extends Controller
     {
         $test_id = session('test_id');
         $answer = Answer::findOrFail($id);
-        $answer->active ?  $answer->active = 0 : $answer->active = 1;
+        $answerActive = $answer->active;
+        if($answer->correct && $answerActive) {
+            return redirect()->route('admin.showTestPage', ['id' => $test_id])->with(['error' => 'Нельзя скрыть ответ, который является правильным!']);
+        }
+        $answerActive ?  $answer->active = 0 : $answer->active = 1;
         $answer->save();
         return redirect()->route('admin.showTestPage', ['id' => $test_id]);
     }
