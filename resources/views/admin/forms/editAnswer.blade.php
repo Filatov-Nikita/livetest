@@ -3,9 +3,8 @@
 <div class="container">
     <form action="" method="POST">
         {{csrf_field()}}
-        <div>
-            <label for="text">Текст</label> <input type="text" name="text" id="text" value="{{$answer->text}}">
-        </div>
+        <div><label for="text">Текст</label> <input type="text" name="text" id="text" value="{{$answer->text}}"></div>
+        <div><label for="correct">Правильный ответ?</label> <input type="checkbox" name="correct" id="correct" {{$answer->correct ? 'checked' : NULL}}></div>
         <input type="submit" value="Сохранить">
     </form>
 </div>

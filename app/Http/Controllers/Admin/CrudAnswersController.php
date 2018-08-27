@@ -38,7 +38,13 @@ class CrudAnswersController extends Controller
     {
         $test_id = session('test_id');
         $answer = Answer::findOrFail($answer_id);
-        $answer->update([ 'text' => $request->input('text') ]);
+        $correctElements = $answer->question->answers->where('correct', 1)->where('id', '<>', $answer_id);
+        if(empty($correctElements[0])) {
+             $correct = $request->input('correct') ? 1 : 0;
+        } else {
+            return 'Вы пытаетесь поставить 2 правильных ответа, для одного вопроса';
+        }
+        $answer->update([ 'text' => $request->input('text'), 'correct' => $correct ]);
         return view('layouts.primary', ['page' => 'admin.pages.linkAnswer', 'test_id' => $test_id, 'edit' => true]);
     }
 
