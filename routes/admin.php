@@ -13,3 +13,8 @@ Route::get('/tests/edit/{test_id}', 'CrudTestsController@edit')->name('admin.edi
 Route::post('/tests/edit/{test_id}', 'CrudTestsController@editPost');
 Route::get('/test/add/', 'CrudTestsController@addShowForm')->name('admin.showAddTestsForm');
 Route::post('/test/add', 'CrudTestsController@addPost');
+Route::get('/tests/answer/toggle/{answer_id}', 'CrudAnswersController@toggle')->name('admin.toggleAnswer');
+Route::get('/tests/answer/add/{question_id}', 'CrudAnswersController@addShowForm')->name('admin.showAddAnswersForm');
+Route::post('/tests/answer/add/{question_id}', 'CrudAnswersController@addPost');
+Route::get('/tests/answer/edit/{answer_id}', 'CrudAnswersController@edit')->name('admin.editAnswer');
+Route::post('/tests/answer/edit/{answer_id}', 'CrudAnswersController@editPost');

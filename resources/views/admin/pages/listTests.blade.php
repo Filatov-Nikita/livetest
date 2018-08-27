@@ -3,12 +3,9 @@
     <div class="addLink"><a href="{{route('admin.showAddTestsForm')}}">Добавить тест</a></div>
     <ul>
         @foreach($tests as $test)
-             <li><a href="{{route('admin.showTestPage', ['id' => $test->id])}}">{{$test->name}}</a> <a href="{{route('admin.editTest', ['test_id' => $test->id])}}">Редактировать</a>
-             @if($test->active)
-                <a href="{{route('admin.toggleTest', ['id' => $test->id])}}">Скрыть</a>
-             @else
-                <a href="{{route('admin.toggleTest', ['id' => $test->id])}}">Отобразить</a>
-             @endif
+             <li>
+                <a href="{{route('admin.showTestPage', ['id' => $test->id])}}">{{$test->name}}</a> <a href="{{route('admin.editTest', ['test_id' => $test->id])}}">Редактировать</a>
+                <a href="{{route('admin.toggleTest', ['id' => $test->id])}}">{{$test->active ? 'Скрыть' : 'Отобразить'}}</a>
             </li>
         @endforeach
     </ul>
