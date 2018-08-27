@@ -12,3 +12,5 @@
 */
 
 Route::get('/tests', 'TestsController@testsDataBase');
+Route::get('/', 'ClientMainController@getActivesTests')->name('client.getActivesTests');
+Route::get('/test/{test_id}', 'ClientMainController@showTest')->name('client.showTest');
