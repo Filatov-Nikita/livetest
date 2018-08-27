@@ -7,7 +7,7 @@
         <ul>
             @foreach($test->questions as $question)
                 <li>
-                    {{$question->name}} <a href="">Редактировать</a> 
+                    {{$question->name}} <a href="{{route('admin.editQuestion', ['question_id' => $question->id])}}">Редактировать</a> 
                     @if($question->active)
                         <a href="{{route('admin.toggleQuestion', ['question_id' => $question->id])}}">Скрыть</a>
                     @else

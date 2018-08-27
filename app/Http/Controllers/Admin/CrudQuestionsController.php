@@ -25,9 +25,19 @@ class CrudQuestionsController extends Controller
         return view('layouts.primary', ['page' => 'admin.pages.link', 'test_id' => $test_id]);
     }
 
-    public function edit() 
+    public function edit($id) 
     {
+        $test_id = session('test_id');
+        $question = Question::findOrFail($id);
+        return view('layouts.primary', ['page' => 'admin.forms.editQuestions', 'question' => $question, 'test_id' => $test_id]);
+    }
 
+    public function editPost($id, Request $request) 
+    {
+        $test_id = session('test_id');
+        $question = Question::findOrFail($id);
+        $question->update([ 'name' => $request->input('name') ]);
+        return view('layouts.primary', ['page' => 'admin.pages.link', 'test_id' => $test_id, 'edit' => true]);
     }
 
     public function toggle($id) 
