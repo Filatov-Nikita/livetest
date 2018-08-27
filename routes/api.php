@@ -18,3 +18,5 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 });
 
 Route::get('tests', 'TestsController@apiTest');
+Route::get('tests/{id}', 'ClientMainController@showTestForApi');
+Route::post('tests/{id}', 'TestsController@getResultApi');
