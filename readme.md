@@ -1,3 +1,12 @@
+## Как развернуть проект
+База mysql, все миграции есть, достаточно будет сделать php artisan make:migrate
+Админка по адресу /admin
+Api для получения списка активных тестов /api/tests
+Api для получения результата теста /api/tests/{test_id}
+
+Клиентская часть по адресу /
+
+
 <p align="center"><img src="https://laravel.com/assets/img/components/logo-laravel.svg"></p>
 
 <p align="center">
