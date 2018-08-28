@@ -22,6 +22,7 @@ class ClientMainController extends Controller
 
     public function getResult($test_id, Request $request) {
         $test = Test::findorFail($test_id);
+        if(!$test->active) return redirect()->route('client.getActivesTests');
         $questions = $test->questions->where('active', 1);
         $correctRes = 0;
         $uncorrectRes = 0;
