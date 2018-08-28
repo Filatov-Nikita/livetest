@@ -1,3 +1,4 @@
+<div><a href="{{route('admin.mainPage')}}">Назад</a></div>
 <div class="title"><h2>Список тестов</h2></div>
 <div class="list">
     <div class="addLink"><a href="{{route('admin.showAddTestsForm')}}">Добавить тест</a></div>

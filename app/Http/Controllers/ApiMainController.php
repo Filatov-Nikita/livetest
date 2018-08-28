@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Test;
+use App\Models\Result;
 use Illuminate\Http\Request;
 
 class ApiMainController extends Controller
@@ -27,13 +28,17 @@ class ApiMainController extends Controller
                 $uncorrectRes++;}
             $total++;
         }
-        $proc = $correctRes / $total * 100;
+        $perc = $correctRes / $total * 100;
+
+        $results = Result::create([
+            'test_id' => $test_id,
+            'user_id' =>  mt_rand(10, 999),
+            'uncorrect' => $uncorrectRes,
+            'correct' => $correctRes, 
+            'total' => $total
+        ]); 
+        $results['perc'] = $perc;
         return response()
-            ->json([
-            'total' => $total,
-            'correctRes' => $correctRes,
-            'uncorrectRes' => $uncorrectRes,
-            'perc' => $proc
-            ], 200);
+            ->json($results, 200);
     }
 }

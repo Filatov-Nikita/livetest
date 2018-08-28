@@ -1,6 +1,6 @@
 <?php
 
-Route::get('/', 'PagesController@showMainPage');
+Route::get('/', 'PagesController@showMainPage')->name('admin.mainPage');
 Route::get('/tests', 'PagesController@showListTestsPage')->name('admin.showListTests');
 Route::get('/tests/{id}', 'PagesController@showTestPage')->name('admin.showTestPage');
 Route::get('/tests/{test_id}/question/add', 'CrudQuestionsController@addShowForm')->name('admin.showAddQuestionsForm');
@@ -18,3 +18,4 @@ Route::get('/tests/answer/add/{question_id}', 'CrudAnswersController@addShowForm
 Route::post('/tests/answer/add/{question_id}', 'CrudAnswersController@addPost');
 Route::get('/tests/answer/edit/{answer_id}', 'CrudAnswersController@edit')->name('admin.editAnswer');
 Route::post('/tests/answer/edit/{answer_id}', 'CrudAnswersController@editPost');
+Route::get('/results', 'PagesController@showResultsPage')->name('admin.resultsPage');

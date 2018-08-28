@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Models\Test;
+use App\Models\Result;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
@@ -24,5 +25,10 @@ class PagesController extends Controller
         session(['test_id' => $id]);
         $test = Test::findOrFail($id);
         return view('layouts.primary', ['page' => 'admin.pages.showTest', 'test' => $test]);
+    }
+
+    public function showResultsPage() {
+        $results = Result::get();
+        return view('layouts.primary', ['page' => 'admin.pages.results', 'results' => $results]);
     }
 }

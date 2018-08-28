@@ -39,7 +39,7 @@ class CrudAnswersController extends Controller
         $test_id = session('test_id');
         $answer = Answer::findOrFail($answer_id);
         $correctElements = $answer->question->answers->where('correct', 1)->where('id', '<>', $answer_id)->first();
-        if(empty($correctElements) && !$answer->correct) {
+        if(empty($correctElements)) {
              $correct = $request->input('correct') ? 1 : 0;
         } else {
 
