@@ -11,6 +11,7 @@ Api для получения результата теста /api/tests/{test_i
 
 Клиентская часть по адресу /
 
+Всего времени на задание ушло около 7 часов 
 
 <p align="center"><img src="https://laravel.com/assets/img/components/logo-laravel.svg"></p>
 
