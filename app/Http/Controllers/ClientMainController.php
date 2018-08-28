@@ -35,9 +35,4 @@ class ClientMainController extends Controller
         $proc = $correctRes / $total * 100;
         return view('layouts.primary', ['page' => 'result', 'uncorrectRes' => $uncorrectRes,'correctRes' => $correctRes, 'total' => $total, 'proc' => $proc]);
     }
-    public function showTestForApi($test_id) {
-        $test = Test::findorFail($test_id);
-        $activesQuestion = $test->questions->where('active', '1');
-        return view('layouts.primary', ['page' => 'showTest', 'test' => $test, 'questions' => $activesQuestion]);
-    }
 }

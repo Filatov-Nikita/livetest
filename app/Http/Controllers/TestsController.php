@@ -23,34 +23,4 @@ class TestsController extends Controller
         $questions = Test::find(1)->questions;
         dump($questions[0]->name); //working
     }
-
-    public function apiTest() 
-    {
-        return Test::get()->where('active', '1');
-    }
-
-    public function getResultApi($test_id, Request $request) 
-    {
-        $test = Test::findorFail($test_id);
-        $questions = $test->questions;
-        $correctRes = 0;
-        $uncorrectRes = 0;
-        $total = 0;
-        foreach($questions as $question) {
-            $correctAnswers = $question->answers->where('correct', 1)->first();
-            if($request->input($question->id) == $correctAnswers->id) {
-                $correctRes++;
-            } else {
-                $uncorrectRes++;}
-            $total++;
-        }
-        $proc = $correctRes / $total * 100;
-        return response()
-            ->json([
-            'total' => $total,
-            'correctRes' => $correctRes,
-            'uncorrectRes' => $uncorrectRes,
-            'perc' => $proc
-            ], 200);
-    }
 }
