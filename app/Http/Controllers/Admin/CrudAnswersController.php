@@ -42,13 +42,13 @@ class CrudAnswersController extends Controller
         if(empty($correctElements)) {
              $correct = $request->input('correct') ? 1 : 0;
         } else {
-
+          
             if($answer->correct) {
                  $answer->correct = 0; $answer->save(); 
                  return redirect()->route('admin.showTestPage', ['id' => $test_id])->with(['error' => 'Возможно произошла какая-то ошибка, но мы уже все поправили :)']);
             } else {
-                return redirect()->route('admin.showTestPage', ['id' => $test_id])->with(['error' => 'Вы пытаетесь поставить 2 правильных ответа для одного вопроса!']); }
-                
+                if($request->input('correct')) return redirect()->route('admin.showTestPage', ['id' => $test_id])->with(['error' => 'Вы пытаетесь поставить 2 правильных ответа для одного вопроса!']); }
+                $correct = 0;
         }
         $answer->update([ 'text' => $request->input('text'), 'correct' => $correct ]);
         return view('layouts.primary', ['page' => 'admin.pages.linkAnswer', 'test_id' => $test_id, 'edit' => true]);

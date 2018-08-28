@@ -16,6 +16,7 @@ class ApiMainController extends Controller
     public function getResultApi($test_id, Request $request) 
     {        
         $test = Test::findorFail($test_id);
+        if(!$test->active) return response()->json(['error404' => 'not Found test'], 404);
         $questions = $test->questions;
         $correctRes = 0;
         $uncorrectRes = 0;
