@@ -15,6 +15,8 @@
     <form action="" method="POST">
         {{csrf_field()}}
         @include('parts.listQuestions')
+        @if($test->questions->where('active', 1)->first())
         <div><input type="submit" value="Завершить"></div>
+        @endif
     </form>
 </div>

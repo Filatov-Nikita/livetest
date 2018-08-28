@@ -1,10 +1,15 @@
 <ul>
-    @foreach($questions as $question)
+    @forelse($questions as $question)
         <li class="bigLi">
             {{$question->name}}
             <ul>
                @include('parts.listAnswers')
             </ul>
         </li>
-    @endforeach
+
+    @empty
+
+        <p>Извините в данном тесте пока нет вопросов</p>
+
+    @endforelse
 </ul>
