@@ -15,6 +15,7 @@ class ClientMainController extends Controller
 
     public function showTest($test_id) {
         $test = Test::findorFail($test_id);
+        if(!$test->active) return redirect()->route('client.getActivesTests');
         $activesQuestion = $test->questions->where('active', '1');
         return view('layouts.primary', ['page' => 'showTest', 'test' => $test, 'questions' => $activesQuestion]);
     }
